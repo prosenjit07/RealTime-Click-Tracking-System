@@ -23,27 +23,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // show loading state
         showLoading();  
 
-        // make API call to track click
+        // Use a simple approach: track the click first, then redirect
         fetch('/api/track-click', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify({ linkUrl: linkUrl })
+            body: `linkUrl=${encodeURIComponent(linkUrl)}`
         })
         .then(response => {
-            if (response.ok) {
-                // the server will redirect us, so we don't need to handle the response
-                // if we get here, it means the redirect didn't work, so we'll do it manually
-                window.location.href = linkUrl;
-            } else {
-                throw new Error('Failed to track click. Please try again.');
-            }
+            // After tracking, redirect to the target URL
+            window.location.href = linkUrl;
         })
         .catch(error => {
             console.error('Error tracking click:', error);
-            showError('Failed to track click. Please try again.');
-            enableButtons();
+            // Even if tracking fails, still redirect to the target URL
+            window.location.href = linkUrl;
         });
     }
 

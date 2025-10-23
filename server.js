@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const http = require('http');
@@ -25,14 +26,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('socketio', io);
 
 // Database connection
-const MONGODB_URI = process.env.MONGO_URL || 'mongodb://localhost:27017/click-tracking';
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/click-tracking';
+const MONGO_USERNAME = process.env.MONGO_USERNAME;
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
+
+let MONGODB_URI = MONGO_URL;
+if (MONGO_USERNAME && MONGO_PASSWORD) {
+  // If using MongoDB Atlas or authenticated MongoDB
+  MONGODB_URI = MONGO_URL.replace('mongodb://', `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@`);
+} else if (MONGO_USERNAME) {
+  // If only username is provided (for local MongoDB with auth)
+  MONGODB_URI = MONGO_URL.replace('mongodb://', `mongodb://${MONGO_USERNAME}@`);
+}
+
+console.log('Connecting to MongoDB...');
+
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
-  console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB successfully');
 }).catch((error) => {
-  console.error('MongoDB connection error:', error);
+  console.error('MongoDB connection error:', error.message);
   process.exit(1);
 });
 

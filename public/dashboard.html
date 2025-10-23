@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Tracking Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Click Tracking Dashboard</h1>
+            <p>Real-time analytics for click tracking system</p>
+            <div class="connection-status">
+                <span id="connectionIndicator" class="realtime-indicator"></span>
+                <span id="connectionText">Something went wrong</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="dashboard-container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="amazonClicks">0</h3>
+                        <p>🛒 Amazon Clicks</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3 id="walmartClicks">0</h3>
+                        <p>🏪 Walmart Clicks</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3 id="totalClicks">0</h3>
+                        <p>📈 Total Clicks</p>
+                    </div>
+                </div>
+
+                <div class="recent-clicks">
+                    <h3>Recent Activity</h3>
+                    <div id="recentClicksList" class="clicks-list">
+                        <p class="no-data">No clicks recorded yet</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-actions">
+                    <button id="refreshBtn" class="refresh-btn">🔄 Refresh Data</button>
+                    <a href="/" class="back-link">← Back to Landing Page</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Real-time dashboard powered by prosenjit</p>
+        </footer>
+    </div>
+
+    <!-- Socket.io client -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

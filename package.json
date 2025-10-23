@@ -7,14 +7,20 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": ["click-tracking", "real-time", "dashboard", "redirect"],
+  "keywords": [
+    "click-tracking",
+    "real-time",
+    "dashboard",
+    "redirect"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^4.18.2",
     "mongoose": "^8.0.3",
-    "socket.io": "^4.7.4",
-    "cors": "^2.8.5"
+    "socket.io": "^4.7.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

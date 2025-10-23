@@ -33,8 +33,16 @@ router.post('/track-click', async (req, res) => {
       });
     }
 
-    // redirect user to target URL
-    res.redirect(linkUrl);
+    // Check if this is an AJAX request
+    const isAjax = req.headers['content-type'] && req.headers['content-type'].includes('application/x-www-form-urlencoded');
+    
+    if (isAjax) {
+      // Return success response for AJAX requests
+      res.json({ success: true, redirectUrl: linkUrl });
+    } else {
+      // Redirect for form submissions
+      res.redirect(linkUrl);
+    }
 
   } catch (error) {
     console.error('Error tracking clicks:', error);
