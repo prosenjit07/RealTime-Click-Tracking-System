@@ -1,6 +1,5 @@
 const express = require('express');
 const Click = require('../models/Click');
-const socketIo = require('socket.io');
 const router = express.Router();
 const amazonUrl= 'https://www.amazon.com';
 const walmartUrl= 'https://www.walmart.com';
@@ -25,7 +24,7 @@ router.post('/track-click', async (req, res) => {
     await click.save();
 
     // Emit real-time update to dashboard clients
-    const io = socketIo.get('socketio');
+    const io = req.app.get('socketio');
     if (io) {
       io.emit('newClick', {
         linkUrl,

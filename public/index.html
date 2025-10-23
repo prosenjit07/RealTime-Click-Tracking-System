@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Tracking System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WELCOME TO CLICK TRACKING SYSTEM</h1>
+            <p>Click the buttons below to track your clicks and get redirected to the respective websites.</p>
+        </header>
+
+        <main>
+            <div class="buttons-container">
+                <button id="amazonBtn" class="track-btn amazon-btn">
+                    <span class="btn-icon">🛒</span>
+                    Go to Amazon
+                </button>
+                
+                <button id="walmartBtn" class="track-btn walmart-btn">
+                    <span class="btn-icon">🏪</span>
+                    Go to Walmart
+                </button>
+            </div>
+
+            <div class="info-section">
+                <p class="info-text">
+                    Each click is tracked through our backend system with real-time analytics.
+                </p>
+                <a href="/dashboard" class="dashboard-link">View Dashboard</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>Real-time click tracking system with Socket.io</p>
+        </footer>
+    </div>
+
+    <script src="js/landing.js"></script>
+</body>
+</html>

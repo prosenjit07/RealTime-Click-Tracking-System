@@ -40,6 +40,11 @@ mongoose.connect(MONGODB_URI, {
 // Routes
 app.use('/api', apiRoutes);
 
+// Dashboard route
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+});
+
 // Socket.io connection handling
 io.on('connection', (socket) => {
   console.log('Client connected to dashboard:', socket.id);
