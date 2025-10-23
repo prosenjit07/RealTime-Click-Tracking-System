@@ -31,11 +31,15 @@ const MONGO_USERNAME = process.env.MONGO_USERNAME;
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
 let MONGODB_URI = MONGO_URL;
-if (MONGO_USERNAME && MONGO_PASSWORD) {
-  // If using MongoDB Atlas or authenticated MongoDB
+
+
+if (MONGO_URL.includes('mongodb+srv://')) {
+  MONGODB_URI = MONGO_URL;
+} else if (MONGO_USERNAME && MONGO_PASSWORD) {
+  // Local MongoDB with authentication
   MONGODB_URI = MONGO_URL.replace('mongodb://', `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@`);
 } else if (MONGO_USERNAME) {
-  // If only username is provided (for local MongoDB with auth)
+  // Local MongoDB with username only
   MONGODB_URI = MONGO_URL.replace('mongodb://', `mongodb://${MONGO_USERNAME}@`);
 }
 
